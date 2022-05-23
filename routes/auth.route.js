@@ -1,19 +1,18 @@
 const router = require("express").Router();
-router;
 const validatorMiddleware = require("../middlewares/validator");
 const authValidatorSchema = require("../validatorshema/auth.shema");
-const userController = require("../controllers/auth.controller");
+const authController = require("../controllers/auth.controller");
 
 router.post(
   "/signup",
   validatorMiddleware(authValidatorSchema.signUp),
-  userController.createUser
+  authController.createUser
 );
 
 router.post(
   "/signin",
   validatorMiddleware(authValidatorSchema.login),
-  userController.userLogin
+  authController.userLogin
 );
  
 

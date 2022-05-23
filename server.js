@@ -1,7 +1,8 @@
 // import requirements
 const mongoConnect = require("./utilities/db_connection");
-const app = require('./app');
-const path = require('path');
+const app = require("./app");
+const path = require("path");
+const cloudinary = require("cloudinary");
 
 // handle uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -11,7 +12,14 @@ process.on("uncaughtException", (err) => {
 });
 
 // align config path
-require('dotenv').config({path:path.join(__dirname, "/config/config.env")});
+require("dotenv").config({ path: path.join(__dirname, "/config/config.env") });
+
+// connect to Cloudinary
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // connect to mongoose
 mongoConnect(process.env.MONGO_URL);
@@ -21,7 +29,7 @@ const PORT = process.env.PORT || 9000;
 
 // listen to server
 const server = app.listen(PORT, () => {
-  console.log('App is listeninig on port...', PORT);
+  console.log("App is listeninig on port...", PORT);
 });
 
 // unhandled rejection

@@ -5,12 +5,16 @@ const AppError = require("../utilities/appError");
 // user authorization
 const isAuth = async (req, res, next) => {
   try {
+      console.log(req.headers)
+
     const token = req.headers.authorization;
     if (!token) throw new AppError("token not found", 404);
     const decoded = jwt.decode(token);
-    const user = await user_repository_instance.find_user_by_id(
-      decoded.user_id
+    console.log(decoded._id)
+    const user = await user_repository_instance.findOneUserById(
+      decoded._id
     );
+    console.log(user);
     if (!user) throw new AppError("must be logged in", 403);
     req.USER_ID = user._id;
     next();
@@ -22,7 +26,7 @@ const isAuth = async (req, res, next) => {
 // admin authorization
 const isAdmin = async (req, res, next) => {
   try {
-    const user = await user_repository_instance.find_user_by_id(req.USER_ID);
+    const user = await user_repository_instance.findOneUserById(req.USER_ID);
     const role = user.role;
     if (role === "admin") next();
     else {
