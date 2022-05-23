@@ -2,7 +2,7 @@ const router = require("express").Router();
 router;
 const validatorMiddleware = require("../middlewares/validator");
 const authValidatorSchema = require("../validatorshema/auth.shema");
-const userController = require("../controllers/user.controller");
+const userController = require("../controllers/auth.controller");
 
 router.post(
   "/signup",
