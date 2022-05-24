@@ -44,6 +44,7 @@ app.get("/api/ping", (req,res) => {
 // setup routes
 app.use('/api/auth', require('./routes/auth.route'));
 app.use('/api/user', require('./routes/user.route'));
+app.use('/api/admin', require('./routes/admin.route'));
 
 // No matching routes
 app.all("*", (req, res, next) => {

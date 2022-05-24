@@ -33,6 +33,11 @@ articleRepository.findUnAcceptedArticles = async () => {
   return unAcceptedArticles;
 };
 
+articleRepository.findPendingArticles = async () => {
+  const pendingArticles = await Article.find({ status: "pending" }).populate("user");
+  return pendingArticles;
+};
+
 articleRepository.acceptArticle = async (id) => {
   const updatedArticle = await Article.finOneAndUpdate(
     { _id: id },

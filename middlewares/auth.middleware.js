@@ -7,7 +7,7 @@ const isAuth = async (req, res, next) => {
   try {
       console.log(req.headers)
 
-    const token = req.headers.authorization;
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
     if (!token) throw new AppError("token not found", 404);
     const decoded = jwt.decode(token);
     console.log(decoded._id)

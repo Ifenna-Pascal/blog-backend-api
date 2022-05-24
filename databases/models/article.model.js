@@ -4,7 +4,7 @@ const articleSchema = new Schema(
   {
     user: {
       type: Types.ObjectId,
-      ref: "User",
+      ref: "user",
       required: [true, "user id is required"],
     },
     title: {

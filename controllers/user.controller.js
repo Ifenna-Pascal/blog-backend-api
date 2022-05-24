@@ -11,7 +11,7 @@ userController.createArticle = async (req, res, next) => {
       if (err) {
         next(new AppError(err.message));
       }
-      if (!files.image.filepath) {
+      if (!files.image) {
         next(new AppError("Image not found"));
       }
       const uploadedImage = await cloudinaryUpload.upload_image(
