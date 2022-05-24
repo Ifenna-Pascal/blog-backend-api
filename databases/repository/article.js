@@ -39,11 +39,12 @@ articleRepository.findPendingArticles = async () => {
 };
 
 articleRepository.acceptArticle = async (id) => {
-  const updatedArticle = await Article.finOneAndUpdate(
+  const updatedArticle = await Article.findOneAndUpdate(
     { _id: id },
     { status: "accepted" },
     { new: true }
   );
+  console.log(updatedArticle);
   return updatedArticle;
 };
 

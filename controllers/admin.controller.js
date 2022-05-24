@@ -19,4 +19,16 @@ adminController.allPendingApprovals = async (req, res, next) => {
   }
 };
 
+adminController.approveArticle = async (req, res, next) => {
+  try {
+    const approved = await adminService.ApproveArticle(req.params.id);
+    res.status(200).json({
+      message: "Article is approved successfully",
+      data: approved
+    });
+  } catch (error) {
+    next(new AppError(error.message), 403);
+  }
+};
+
 module.exports = adminController;
