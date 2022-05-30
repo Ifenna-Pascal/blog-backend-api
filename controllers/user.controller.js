@@ -2,11 +2,13 @@ const articleService = require("../services/article.service");
 const AppError = require("../utilities/appError");
 const Formidable = require("formidable");
 const cloudinaryUpload = require("../utilities/cloudinaryUpload");
+const calculate_reading_time = require('../utilities/caluclate_reading_time');
 const userController = {};
 
 userController.createArticle = async (req, res, next) => {
   try {
     const form = new Formidable.IncomingForm();
+    const readingTime = await calculate_reading_time(fields.content);
     form.parse(req, async function (err, fields, files) {
       if (err) {
         next(new AppError(err.message));
@@ -22,7 +24,8 @@ userController.createArticle = async (req, res, next) => {
         user: req.USER_ID,
         title: fields.name,
         content: fields.content,
-        imageUrl: uploadedImage.url,
+        readingTime: readingTime,
+        imageUrl: uploadedImage.url
       };
       const article = await articleService.createArticle(data);
       res.status(200).json({
@@ -34,5 +37,29 @@ userController.createArticle = async (req, res, next) => {
     next(new AppError(error.message), 403);
   }
 };
+
+userController.findAcceptedArticles = async (req,res,next) => {
+  try {
+    const articles = await articleService.getAllArticles();
+    res.status(200).json({
+      status: "All accepted articles",
+      message: articles,
+    });
+  } catch (error) {
+    next (new AppError(error.message), 403)
+  }
+}
+
+userController.likeArticle = async (req,res,next) => {
+  try {
+    const article = await articleService.likeArticle(req.params.id);
+    res.status(200).json({
+      status: "Article Like successfully",
+      message: article,
+    });
+  } catch (error) {
+    next (new AppError(error.message), 403)
+  }
+}
 
 module.exports = userController;

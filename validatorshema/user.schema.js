@@ -7,4 +7,9 @@ userValidatorSchema.createArticle = Joi.object().keys({
   content: Joi.string().required(),
 });
 
+
+userValidatorSchema.likeArticle = Joi.object().keys({
+  id: Joi.string().required(),
+});
+
 module.exports = userValidatorSchema;

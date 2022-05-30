@@ -11,6 +11,7 @@
   "author": "Monanu Ifenna",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.30.0",
     "dotenv": "^16.0.1",

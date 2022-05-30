@@ -5,8 +5,6 @@ const AppError = require("../utilities/appError");
 // user authorization
 const isAuth = async (req, res, next) => {
   try {
-      console.log(req.headers)
-
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
     if (!token) throw new AppError("token not found", 404);
     const decoded = jwt.decode(token);
@@ -14,7 +12,6 @@ const isAuth = async (req, res, next) => {
     const user = await user_repository_instance.findOneUserById(
       decoded._id
     );
-    console.log(user);
     if (!user) throw new AppError("must be logged in", 403);
     req.USER_ID = user._id;
     next();

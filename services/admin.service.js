@@ -20,4 +20,13 @@ adminService.ApproveArticle = async (id) => {
   }
 };
 
+adminService.rejectArticle = async (id) => {
+  try {
+    const rejected = await articleRepository.rejectArticle(id);
+    return rejected;
+  } catch (error) {
+      throw new Error(error.message);
+  }
+};
+
 module.exports = adminService;

@@ -29,6 +29,10 @@ const articleSchema = new Schema(
       type: Number,
       default: 0,
     },
+    readingTime: {
+      type: String,
+      required: [true, "Minutes read is required"],
+    },
     upvotes: {
       type: Number,
       default: 0,

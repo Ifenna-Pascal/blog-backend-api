@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const adminValidatorSchema = {};
 
-adminValidatorSchema.approveArticle = Joi.object().keys({
+adminValidatorSchema.updateArticle = Joi.object().keys({
   id: Joi.string().required(),
 });
 
