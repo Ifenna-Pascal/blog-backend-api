@@ -8,7 +8,6 @@ const userController = {};
 userController.createArticle = async (req, res, next) => {
   try {
     const form = new Formidable.IncomingForm();
-    const readingTime = await calculate_reading_time(fields.content);
     form.parse(req, async function (err, fields, files) {
       if (err) {
         next(new AppError(err.message));
@@ -24,7 +23,7 @@ userController.createArticle = async (req, res, next) => {
         user: req.USER_ID,
         title: fields.name,
         content: fields.content,
-        readingTime: readingTime,
+        readingTime: await calculate_reading_time(fields.content),
         imageUrl: uploadedImage.url
       };
       const article = await articleService.createArticle(data);

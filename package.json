@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "set NODE_ENV=development && npm run start",
+    "dev": "set APP_ENV=development && npm run start",
+    "staging": "set APP_ENV=staging && npm run start",
+    "prod": "set APP_ENV=production && npm run start",
     "start": "nodemon server"
   },
   "author": "Monanu Ifenna",

@@ -12,7 +12,7 @@ process.on("uncaughtException", (err) => {
 });
 
 // align config path
-require("dotenv").config({ path: path.join(__dirname, "/config/config.env") });
+require("dotenv").config({ path: path.join(__dirname, `/config/${process.env.APP_ENV?.trim()}.env`), });
 
 // connect to Cloudinary
 cloudinary.v2.config({
