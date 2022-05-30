@@ -5,7 +5,7 @@ const rateLimit = require("express-rate-limit");
 
 // import global error
 const globalErrorHandler = require("./controllers/error.controller");
-const AppError = require("./utilities/AppError");
+const AppError = require("./utilities/appError");
 
 // initialize express
 const app = express();
