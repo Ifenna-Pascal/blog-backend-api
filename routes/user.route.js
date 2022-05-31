@@ -8,7 +8,6 @@ const userController = require("../controllers/user.controller");
 router.post(
   "/create_article",
   auth.isAuth,
-  validatorMiddleware(userValidatorSchema.createArticle, "fields"),
   userController.createArticle
 );
 
