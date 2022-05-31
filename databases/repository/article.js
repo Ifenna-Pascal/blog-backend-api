@@ -22,9 +22,13 @@ articleRepository.findUserArticle = async (id) => {
 };
 
 articleRepository.createArticle = async (data) => {
-  const newArticle = new Article(data);
-  const savedArticle = await newArticle.save();
-  return savedArticle;
+  try {
+    const newArticle = new Article(data);
+    const savedArticle = await newArticle.save();
+    return savedArticle;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.findAcceptedId = async (id) => {
@@ -70,8 +74,8 @@ articleRepository.likeArticle = async (id) => {
       { _id: id },
       {
         $inc: {
-          upvotes: 1
-        }
+          upvotes: 1,
+        },
       },
       { new: true }
     );
