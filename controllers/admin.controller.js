@@ -34,7 +34,7 @@ adminController.approveArticle = async (req, res, next) => {
 
 adminController.rejectArticle = async (req, res, next) => {
   try {
-    const rejected = await adminService.rejectArticleArticle(req.params.id);
+    const rejected = await adminService.rejectArticle(req.params.id);
     res.status(200).json({
       message: "Article is approved successfully",
       data: rejected,
