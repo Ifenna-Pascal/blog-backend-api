@@ -15,7 +15,7 @@ router.put(
   "/approve/:id",
   auth.isAuth,
   auth.isAdmin,
-  validatorMiddleware(adminValidatorSchema.updateArticleArticle, "params"),
+  validatorMiddleware(adminValidatorSchema.updateArticle, "params"),
   adminController.approveArticle
 );
 

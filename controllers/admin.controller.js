@@ -21,6 +21,7 @@ adminController.allPendingApprovals = async (req, res, next) => {
 
 adminController.approveArticle = async (req, res, next) => {
   try {
+    console.log(req.params)
     const approved = await adminService.ApproveArticle(req.params.id);
     res.status(200).json({
       message: "Article is approved successfully",

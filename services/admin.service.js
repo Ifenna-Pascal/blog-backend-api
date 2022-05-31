@@ -13,6 +13,10 @@ adminService.findAllPendingArticles = async () => {
 
 adminService.ApproveArticle = async (id) => {
   try {
+    const findArticle = await articleRepository.findById(id);
+    if(findArticle && findArticle.status === 'accepted') {
+      return "Article approved already"
+    }
     const approved = await articleRepository.acceptArticle(id);
     return approved;
   } catch (error) {

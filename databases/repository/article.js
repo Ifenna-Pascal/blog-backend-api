@@ -3,8 +3,12 @@ const Article = require("../models/article.model");
 const articleRepository = {};
 
 articleRepository.findById = async (id) => {
-  const article = await Article.findOne({ _id: id });
-  return article;
+  try {
+    const article = await Article.findOne({ _id: id });
+    return article;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.findAcceptedArticles = async () => {
@@ -17,8 +21,12 @@ articleRepository.findAcceptedArticles = async () => {
 };
 
 articleRepository.findUserArticle = async (id) => {
-  const article = await Article.find({ user: id });
-  return article;
+  try {
+    const article = await Article.find({ user: id });
+    return article;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.createArticle = async (data) => {
@@ -32,40 +40,60 @@ articleRepository.createArticle = async (data) => {
 };
 
 articleRepository.findAcceptedId = async (id) => {
-  const articles = await Article.find({ _id: id, status: "accepted" });
-  return articles;
+  try {
+    const articles = await Article.find({ _id: id, status: "accepted" });
+    return articles;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.findUnAcceptedArticles = async () => {
-  const unAcceptedArticles = await Article.find({ status: "rejected" });
-  return unAcceptedArticles;
+  try {
+    const unAcceptedArticles = await Article.find({ status: "rejected" });
+    return unAcceptedArticles;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.findPendingArticles = async () => {
-  const pendingArticles = await Article.find({ status: "pending" }).populate(
-    "user"
-  );
-  return pendingArticles;
+  try {
+    const pendingArticles = await Article.find({ status: "pending" }).populate(
+      "user"
+    );
+    return pendingArticles;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.acceptArticle = async (id) => {
-  const updatedArticle = await Article.findOneAndUpdate(
-    { _id: id, status: "pending" },
-    { status: "accepted" },
-    { new: true }
-  );
-  console.log(updatedArticle);
-  return updatedArticle;
+  try {
+    const updatedArticle = await Article.findOneAndUpdate(
+      { _id: id, status: "pending" },
+      { status: "accepted" },
+      { new: true }
+    );
+    console.log(updatedArticle);
+    return updatedArticle;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.rejectArticle = async (id) => {
-  const updatedArticle = await Article.findOneAndUpdate(
-    { _id: id, status: "pending" },
-    { status: "rejected" },
-    { new: true }
-  );
-  console.log(updatedArticle);
-  return updatedArticle;
+  try {
+    const updatedArticle = await Article.findOneAndUpdate(
+      { _id: id, status: "pending" },
+      { status: "rejected" },
+      { new: true }
+    );
+    console.log(updatedArticle);
+    return updatedArticle;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 articleRepository.likeArticle = async (id) => {
