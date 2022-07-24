@@ -44,4 +44,16 @@ adminController.rejectArticle = async (req, res, next) => {
   }
 };
 
+adminController.answer = async (req, res, next) => {
+  try {
+    const answered = await adminService.answerQuestion(req.params.id, req.body.answer);
+    res.status(200).json({
+      message: "Question answered successfully",
+      data: answered,
+    });
+  } catch (error) {
+    next(new AppError(error.message), 403);
+  }
+};
+
 module.exports = adminController;

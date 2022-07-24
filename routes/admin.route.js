@@ -27,5 +27,6 @@ router.put(
   adminController.rejectArticle
 );
 
+router.put("/answer_question/:id", auth.isAuth, auth.isAdmin, adminController.answer);
 
 module.exports = router;

@@ -39,22 +39,20 @@ questionRepo.unAnsweredQuestion = async () => {
   }
 };
 
-questionRepo.answerQuestion = async (id, answer) => {
-    try {
-        const answerQuestion = await Article.findOneAndUpdate(
-            { _id: id, answer: answer},
-            { isAnswerd: true },
-            { new: true }
-        );
-        return answerQuestion;
-    } catch (error) {
-       throw new Error(error.message); 
-    }
-}
+questionRepo.QuestionById = async (id) => {
+  try {
+    const question = await Question.findById(id);
+    return question;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
 
 questionRepo.upVoteAnswer = async (id) => {
   try {
-    const article = await Question.findOneAndUpdate(
+    const voteAnswer = await Question.findOneAndUpdate(
       { _id: id },
       {
         $inc: {
@@ -63,7 +61,7 @@ questionRepo.upVoteAnswer = async (id) => {
       },
       { new: true }
     );
-    return article;
+    return voteAnswer;
   } catch (error) {
     throw new Error(error.message);
   }

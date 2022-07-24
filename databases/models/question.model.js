@@ -17,7 +17,7 @@ const questionSchema = new Schema(
       type: String,
     },
 
-    isAnswerd: {
+    isAnswered: {
       type: Boolean,
       default: false,
     },

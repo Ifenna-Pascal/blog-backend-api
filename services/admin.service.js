@@ -1,4 +1,5 @@
 const articleRepository = require("../databases/repository/article");
+const questionRepository = require("../databases/repository/question.repo");
 
 const adminService = {};
 
@@ -32,6 +33,22 @@ adminService.rejectArticle = async (id) => {
     }
     const rejected = await articleRepository.rejectArticle(id);
     return rejected;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+adminService.answerQuestion = async (id, answer) => {
+  try {
+    let question = await questionRepository.QuestionById(id);
+    if (question.isAnswered === true) {
+      return "Question Has Already Been Anwered By Admin Previously";
+    } else {
+      question.answer = answer;
+      question.isAnswered = true;
+      const answeredQuestion = await question.save();
+      return answeredQuestion;
+    }
   } catch (error) {
     throw new Error(error.message);
   }
