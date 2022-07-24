@@ -23,6 +23,7 @@ cloudinary.v2.config({
 
 // connect to mongoose
 mongoConnect(process.env.MONGO_URL);
+console.log(process.env.APP_ENV)
 
 // connect port
 const PORT = process.env.PORT || 9000;
