@@ -21,6 +21,15 @@ questionService.allQuestions = () => {
     }
 }
 
+questionService.oneQuestion = (id) => {
+    try {
+        const question = questionRepository.QuestionById(id);
+        return question;
+    } catch (error) {
+        throw new AppError(error.message);
+    }
+}
+
 questionService.answeredQuestions = () => {
     try {
         const answered = questionRepository.answeredQuestions();
@@ -38,5 +47,21 @@ questionService.unAnsweredQuestions = () => {
         throw new AppError(error.message);
     }
 }
+
+questionService.voteAnswer = async (id, user) => {
+    try {
+        const question = await questionRepository.QuestionById(id);
+        console.log(question);
+        if(!question.isAnswered){
+            throw new AppError("Question isn't answered yet")
+        }
+        const result = questionRepository.upVoteAnswer(id);
+        return result;
+    } catch (error) {
+        throw new AppError(error.message);
+    } 
+}
+
+
 
 module.exports = questionService;

@@ -11,4 +11,12 @@ router.put(
   userController.likeArticle
 );
 
+router.get("/all_questions", userController.allQuestions);
+
+router.get("/question/:id", validatorMiddleware(userValidatorSchema.likeArticle, "params") ,userController.getAQuestion)
+
+router.get("/answered_questions", userController.answeredQuestions);
+
+router.get("/unanswered_questions", userController.unAnsweredQuestions);
+
 module.exports = router;

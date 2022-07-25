@@ -27,6 +27,6 @@ router.put(
   adminController.rejectArticle
 );
 
-router.put("/answer_question/:id", auth.isAuth, auth.isAdmin, adminController.answer);
+router.put("/answer_question/:id", auth.isAuth, auth.isAdmin,  validatorMiddleware(adminValidatorSchema.updateArticle, "params"), adminController.answer);
 
 module.exports = router;

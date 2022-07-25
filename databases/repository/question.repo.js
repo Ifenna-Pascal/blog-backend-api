@@ -15,7 +15,7 @@ questionRepo.createQuestion = async (question) => {
   try {
     const newQuestion = await new Question(question);
     const savedQuestion = await newQuestion.save();
-    return newQuestion;
+    return savedQuestion;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -23,16 +23,17 @@ questionRepo.createQuestion = async (question) => {
 
 questionRepo.answeredQuestions = async () => {
   try {
-    const unAnsweredQuestions = await Question.find({ isAnswerd: true });
+    const unAnsweredQuestions = await Question.find({ isAnswered: true });
     return unAnsweredQuestions;
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
-questionRepo.unAnsweredQuestion = async () => {
+questionRepo.unAnsweredQuestions = async () => {
   try {
-    const unAnsweredQuestions = await Question.find({ isAnswerd: false });
+    const unAnsweredQuestions = await Question.find({ isAnswered: false });
+    console.log(unAnsweredQuestions);
     return unAnsweredQuestions;
   } catch (error) {
     throw new Error(error.message);

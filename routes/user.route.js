@@ -14,10 +14,7 @@ router.post(
   userController.askQuestion
 );
 
-router.get("/all_questions", userController.allQuestions);
+router.put("/vote_answer/:id",  validatorMiddleware(userValidatorSchema.likeArticle, "params"), auth.isAuth, userController.voteAnswer);
 
-router.get("/answered_questions", userController.answeredQuestions);
-
-router.get("/unanswered_questions", userController.unAnsweredQuestions);
 
 module.exports = router;

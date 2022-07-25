@@ -85,16 +85,34 @@ userController.askQuestion = async (req, res, next) => {
 userController.allQuestions = async (req, res, next) => {
   try {
     const questions = await questionService.allQuestions();
-    return questions;
+    res.status(200).json({
+      status: 'questions retrieved successfully',
+      message: questions
+    })
   } catch (error) {
     next(new AppError(error.message), 403);
   }
 };
 
+userController.getAQuestion = async (req, res, next) => {
+  try {
+    const question = await questionService.oneQuestion(req.params.id)
+    res.status(200).json({
+      status: 'question retrieved successfully',
+      message: question
+    })
+  } catch (error) {
+    next(new AppError(error.message), 404);
+  }
+}
+
 userController.answeredQuestions = async (req, res, next) => {
   try {
     const questions = await questionService.answeredQuestions();
-    return questions;
+    res.status(200).json({
+      status: 'answered questions retrieved successfully',
+      message: questions
+    })
   } catch (error) {
     next(new AppError(error.message), 403);
   }
@@ -102,11 +120,25 @@ userController.answeredQuestions = async (req, res, next) => {
 userController.unAnsweredQuestions = async (req, res, next) => {
   try {
     const questions = await questionService.unAnsweredQuestions();
-    return questions;
+    res.status(200).json({
+      status: 'unanswered questions retrieved successfully',
+      message: questions
+    })
   } catch (error) {
     next(new AppError(error.message), 403);
   }
 };
+
+userController.voteAnswer = async (req, res, next) => {
+  try {
+    const result = await questionService.voteAnswer(req.params.id);
+    res.status(200).json({
+      message: "Voted Successfully"
+    })
+  } catch (error) {
+    next(new AppError(error.message), 403);
+  }
+}
 
 
 module.exports = userController;
